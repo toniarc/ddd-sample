@@ -1,0 +1,6 @@
+br/gov/pa/prodepa/pae/documento/web/exception/RestExceptionHandler.class
+br/gov/pa/prodepa/pae/documento/web/exception/ValidationErrorDetails$ValidationErrorDetailsBuilderImpl.class
+br/gov/pa/prodepa/pae/documento/web/exception/ValidationErrorDetails.class
+br/gov/pa/prodepa/pae/documento/web/exception/ValidationErrorDetails$1.class
+br/gov/pa/prodepa/pae/documento/web/controller/CadastrarModeloEstruturaController.class
+br/gov/pa/prodepa/pae/documento/web/exception/ValidationErrorDetails$ValidationErrorDetailsBuilder.class
