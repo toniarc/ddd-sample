@@ -10,7 +10,7 @@
   
   <modules>
   	<module>pae-documento-web-adapter</module>
-  	<module>ModeloEstruturaPersistenceAdapter</module>
+  	<module>pae-documento-persistence-adapter</module>
   	<module>html2pdf-client</module>
   </modules>
 </project>

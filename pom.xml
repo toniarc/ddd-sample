@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>pae-documento-domain</module>
-		<module>pae-documento-infraestrutura</module>
+		<module>pae-documento-adapters</module>
 		<module>pae-documento-springboot</module>
 		<module>pae-documento-test</module>
 		<module>pae-documento-application</module>
