@@ -1,6 +1,0 @@
-/opt/workspaces/photon/pae-documento-service/pae-documento-infraestrutura/ModeloEstruturaPersistenceAdapter/src/main/java/br/gov/pa/prodepa/pae/documento/entity/ModeloEstruturaEntity.java
-/opt/workspaces/photon/pae-documento-service/pae-documento-infraestrutura/ModeloEstruturaPersistenceAdapter/src/main/java/br/gov/pa/prodepa/pae/documento/mapper/ModeloEstruturaMapper.java
-/opt/workspaces/photon/pae-documento-service/pae-documento-infraestrutura/ModeloEstruturaPersistenceAdapter/src/main/java/br/gov/pa/prodepa/pae/documento/repository/ModeloEstruturaJpaRepository.java
-/opt/workspaces/photon/pae-documento-service/pae-documento-infraestrutura/ModeloEstruturaPersistenceAdapter/src/main/java/br/gov/pa/prodepa/pae/documento/persistence/ModeloEstruturaPersistenceAdapter.java
-/opt/workspaces/photon/pae-documento-service/pae-documento-infraestrutura/ModeloEstruturaPersistenceAdapter/src/main/java/br/gov/pa/prodepa/pae/documento/entity/OrgaoEntity.java
-/opt/workspaces/photon/pae-documento-service/pae-documento-infraestrutura/ModeloEstruturaPersistenceAdapter/src/main/java/br/gov/pa/prodepa/pae/documento/entity/EspecieEntity.java

@@ -1,7 +1,0 @@
-br/gov/pa/prodepa/pae/documento/entity/OrgaoEntity.class
-br/gov/pa/prodepa/pae/documento/entity/ModeloEstruturaEntity.class
-br/gov/pa/prodepa/pae/documento/entity/EspecieEntity.class
-br/gov/pa/prodepa/pae/documento/mapper/ModeloEstruturaMapper.class
-br/gov/pa/prodepa/pae/documento/mapper/ModeloEstruturaMapperImpl.class
-br/gov/pa/prodepa/pae/documento/persistence/ModeloEstruturaPersistenceAdapter.class
-br/gov/pa/prodepa/pae/documento/repository/ModeloEstruturaJpaRepository.class
