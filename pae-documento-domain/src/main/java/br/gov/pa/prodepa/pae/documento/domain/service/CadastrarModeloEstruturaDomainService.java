@@ -3,7 +3,7 @@ package br.gov.pa.prodepa.pae.documento.domain.service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import br.gov.pa.prodepa.pae.documento.domain.command.CadastrarModeloEstruturaCommand;
+import br.gov.pa.prodepa.pae.documento.domain.dto.CadastrarModeloEstruturaDto;
 import br.gov.pa.prodepa.pae.documento.domain.model.Auditoria;
 import br.gov.pa.prodepa.pae.documento.domain.model.Especie;
 import br.gov.pa.prodepa.pae.documento.domain.model.Margem;
@@ -21,7 +21,7 @@ public class CadastrarModeloEstruturaDomainService implements CadastrarModeloEst
 	
 	private final GerarThumbnailPort gerarThumbnailPort;
 			
-	public void cadastrarModeloEstrutura(CadastrarModeloEstruturaCommand command) {
+	public void cadastrarModeloEstrutura(CadastrarModeloEstruturaDto command) {
 				
 		command.validateSelf();
 		

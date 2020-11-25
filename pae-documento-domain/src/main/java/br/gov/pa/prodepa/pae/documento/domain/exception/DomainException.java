@@ -28,11 +28,17 @@ public class DomainException extends RuntimeException{
 	}
 	
 	public void addError(String mensagem) {
-		errors.add(new CustomFieldError(null, mensagem));
+		CustomFieldError customFieldError = new CustomFieldError(null, mensagem);
+		if(!errors.contains(customFieldError)) {
+			errors.add(customFieldError);
+		}
 	}
 	
 	public void addError(String codigo, String mensagem) {
-		errors.add(new CustomFieldError(null, mensagem));
+		CustomFieldError customFieldError = new CustomFieldError(codigo, mensagem);
+		if(!errors.contains(customFieldError)) {
+			errors.add(customFieldError);
+		}
 	}
 
 	public void throwException() {

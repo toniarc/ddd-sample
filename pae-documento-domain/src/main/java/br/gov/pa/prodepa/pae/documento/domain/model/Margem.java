@@ -1,17 +1,19 @@
 package br.gov.pa.prodepa.pae.documento.domain.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 public final class Margem {
 
-	private final String topo;
+	private String topo;
 	
-	private final String rodape;
+	private String rodape;
 	
-	private final String direita;
+	private String direita;
 	
-	private final String esquerda;
+	private String esquerda;
 
 	public Margem(String margemTopo, String margemDireita, String margemRodape, String margemEsquerda) {
 		super();

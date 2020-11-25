@@ -1,4 +1,4 @@
-package br.gov.pa.prodepa.pae.documento.domain.command;
+package br.gov.pa.prodepa.pae.documento.domain.dto;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import br.gov.pa.prodepa.pae.documento.domain.model.OrientacaoPapel;
 import lombok.Getter;
 
 @Getter
-public class CadastrarModeloEstruturaCommand extends SelfValidating<CadastrarModeloEstruturaCommand>{
+public class CadastrarModeloEstruturaDto extends SelfValidating<CadastrarModeloEstruturaDto>{
 
 	@NotNull
 	private String cabecalho;
@@ -44,10 +44,10 @@ public class CadastrarModeloEstruturaCommand extends SelfValidating<CadastrarMod
 	@NotNull
 	private Long orgaoId;
 	
-	public CadastrarModeloEstruturaCommand() {
+	public CadastrarModeloEstruturaDto() {
 	}
 
-	public CadastrarModeloEstruturaCommand(String cabecalho, String rodape, String titulo, FormatoPapel formato,
+	public CadastrarModeloEstruturaDto(String cabecalho, String rodape, String titulo, FormatoPapel formato,
 			OrientacaoPapel orientacao, String margemTopo, String margemRodape, String margemDireita,
 			String margemEsquerda, List<Long> especiesId, Long orgaoId) {
 		super();

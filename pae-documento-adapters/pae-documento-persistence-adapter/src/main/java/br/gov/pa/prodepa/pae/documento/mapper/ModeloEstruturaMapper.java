@@ -18,5 +18,12 @@ public interface ModeloEstruturaMapper {
 	@Mapping(source="margens.rodape", target="margemRodape")
 	@Mapping(source="auditoria.manutUsuarioId", target="manutUsuarioId")
 	ModeloEstruturaEntity mapToEntity(ModeloEstrutura modeloEstrutura);
+
+	@Mapping(source="margemDireita", target="margens.direita")
+	@Mapping(source="margemEsquerda", target="margens.esquerda")
+	@Mapping(source="margemTopo", target="margens.topo")
+	@Mapping(source="margemRodape", target="margens.rodape")
+	@Mapping(source="manutUsuarioId", target="auditoria.manutUsuarioId")
+	ModeloEstrutura mapToDomain(ModeloEstruturaEntity entity);
 	
 }

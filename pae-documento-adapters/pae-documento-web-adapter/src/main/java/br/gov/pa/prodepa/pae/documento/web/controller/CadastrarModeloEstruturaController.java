@@ -5,18 +5,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gov.pa.prodepa.pae.documento.application.service.CadastrarModeloEstruturaApplication;
-import br.gov.pa.prodepa.pae.documento.domain.command.CadastrarModeloEstruturaCommand;
+import br.gov.pa.prodepa.pae.documento.application.service.CadastrarModeloEstruturaService;
+import br.gov.pa.prodepa.pae.documento.domain.dto.CadastrarModeloEstruturaDto;
 
 @RestController
-public class CadastrarModeloEstruturaController {
+public final class CadastrarModeloEstruturaController {
 
+	private final CadastrarModeloEstruturaService cadastrarModeloEstruturaApplicationService;
+	
 	@Autowired
-	private CadastrarModeloEstruturaApplication cadastrarModeloEstruturaApplicationService;
+	public CadastrarModeloEstruturaController(final CadastrarModeloEstruturaService cadastrarModeloEstruturaApplicationService) {
+		this.cadastrarModeloEstruturaApplicationService = cadastrarModeloEstruturaApplicationService;
+	}
 
 	@PostMapping("/modelos-estrutura")
-	public void cadastrarModeloEstrutura(@RequestBody CadastrarModeloEstruturaCommand command) {
-		
+	public void cadastrarModeloEstrutura(@RequestBody final CadastrarModeloEstruturaDto command) {
 		cadastrarModeloEstruturaApplicationService.cadastrarModeloEstrutura(command);
 	}
 	
