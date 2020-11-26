@@ -14,7 +14,7 @@ import br.gov.pa.prodepa.pae.documento.domain.story.CadastrarModeloConteudoStory
 
 @Component
 @Transactional
-final class CadastrarModeloConteudoApplicationService implements CadastrarModeloConteudoService {
+public class CadastrarModeloConteudoApplicationService implements CadastrarModeloConteudoService {
 
 	private final ModeloConteudoRepostiory modeloConteudoRepository;
 	private final ModeloEstruturaRepository modeloEstruturaRepository;

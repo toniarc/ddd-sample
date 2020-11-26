@@ -67,15 +67,16 @@ public class ModeloEstruturaEntity {
 	
 	private Date manutData;
 	
+	/*
 	@ManyToMany
 	@JoinTable(name="modelo_estrutura_especie", schema="pae", 
 		joinColumns=@JoinColumn(name="modelo_estrutura_id"),
 		inverseJoinColumns=@JoinColumn(name="especie_id"))	
-	private Set<EspecieEntity> especies;
+	private Set<Long> especiesId;
+	*/
 	
-	@ManyToOne
-	@JoinColumn(name="orgao_id")
-	private OrgaoEntity orgao;
+	@Column(name="orgao_id")
+	private Long orgaoId;
 
 	@Override
 	public int hashCode() {

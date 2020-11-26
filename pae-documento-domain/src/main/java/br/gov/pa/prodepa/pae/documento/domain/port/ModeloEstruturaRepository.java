@@ -1,10 +1,10 @@
 package br.gov.pa.prodepa.pae.documento.domain.port;
 
-import br.gov.pa.prodepa.pae.documento.domain.model.ModeloEstrutura;
+import br.gov.pa.prodepa.pae.documento.domain.model.ModeloEstruturaAggregateRoot;
 
 public interface ModeloEstruturaRepository {
 
-	void cadastrarModeloEstrutura(ModeloEstrutura modeloEstrutura);
+	void cadastrarModeloEstrutura(ModeloEstruturaAggregateRoot modeloEstrutura);
 	
-	ModeloEstrutura buscarPorId(Long id);
+	ModeloEstruturaAggregateRoot buscarPorId(Long id);
 }

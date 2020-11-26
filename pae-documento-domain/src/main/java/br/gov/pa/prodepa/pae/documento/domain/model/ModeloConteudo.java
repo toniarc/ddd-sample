@@ -1,68 +1,75 @@
 package br.gov.pa.prodepa.pae.documento.domain.model;
 
+import java.util.function.Supplier;
+
 import br.gov.pa.prodepa.pae.documento.domain.exception.DomainException;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
-public class ModeloConteudo {
+public final class ModeloConteudo {
 
-	private Long id;
-	private String nome;
-	private byte[] thumbnail;
-	private boolean ativo;
-	private String conteudo;
-	private Boolean basico;
-	private Long orgaoId;
-	private Long localizacaoId;
-	private Long especieId;
-	private Long assuntoId;
-	private Long modeloEstruturaId;
-	private Auditoria auditoria;
-	private TipoAbrangencia abrangencia;
-	private Long tipoId;
+	private final Long id;
+	private final String nome;
+	private final byte[] thumbnail;
+	private final boolean ativo;
+	private final String conteudo;
+	private final Boolean basico;
+	private final Long orgaoId;
+	private final Long especieId;
+	private final Long assuntoId;
+	private final Long modeloEstruturaId;
+	private final Auditoria auditoria;
+	private final TipoAbrangencia abrangencia;
 
-	public void validarCampos(Usuario usuario) {
+	@Builder
+	public ModeloConteudo(Long id, String nome, Supplier<byte[]> thumbnail, boolean ativo, String conteudo, Boolean basico,
+			Long orgaoId, Long especieId, Long assuntoId, Long modeloEstruturaId, Auditoria auditoria,
+			TipoAbrangencia abrangencia) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.ativo = ativo;
+		this.conteudo = conteudo;
+		this.basico = basico;
+		this.orgaoId = orgaoId;
+		this.especieId = especieId;
+		this.assuntoId = assuntoId;
+		this.modeloEstruturaId = modeloEstruturaId;
+		this.auditoria = auditoria;
+		this.abrangencia = abrangencia;
+		
+		validarCampos();
+		
+		this.thumbnail = thumbnail.get();
+	}
+	
+	private void validarCampos() {
 		
 		DomainException de = new DomainException();
-		
-		//TODO os perfis estao confusos 
-		//TODO campo basico na tabela modelo_conteudo deve ser boolean
-		
-		//TODO as validacoes baseadas no perfil do usuario nao sao necessarias uma vez que todos os campos sao obrigatorios 
-		//TODO pra que serve o campo tipoId?
-		//TODO pra que serve o campo localizacaoId?
-		
-		//Critério de aceitação 01
-		if(usuario.getRoles().contains(ApplicationRoles.GESTOR_DO_SISTEMA) || usuario.getRoles().contains(ApplicationRoles.ADMINISTRADOR_DO_ORGAO)) {
-			if(nome == null) de.addError("Campo nome obrigatório") ;
-			if(basico == null) de.addError("Campo básico obrigatório") ;
-			if(especieId == null) de.addError("Campo espécie obrigatório") ;
-			if(assuntoId == null) de.addError("Campo assunto obrigatório") ;
-			//TODO abrangencia nao existe na tabela modelo_conteudo
-			if(abrangencia == null) de.addError("Campo abrangência obrigatório") ;
-			if(conteudo == null) de.addError("Campo conteúdo obrigatório") ;
-			if(modeloEstruturaId == null) de.addError("Campo modelo de estrutura obrigatório") ;
-		}
-		
-		//Critério de aceitação 02
-		if(usuario.getRoles().contains(ApplicationRoles.ADMINISTRADOR_DO_SISTEMA_NO_ORGAO)) {
-			if(nome == null) de.addError("Campo nome obrigatório");
-			if(especieId == null) de.addError("Campo espécie obrigatório");
-			if(assuntoId == null) de.addError("Campo assunto obrigatório");
-			if(abrangencia == null) de.addError("Campo abrangência obrigatório") ;
-			if(conteudo == null) de.addError("Campo conteúdo obrigatório") ;
-			if(modeloEstruturaId == null) de.addError("Campo modelo de estrutura obrigatório") ;
-		}
-		
-		//Critério de aceitação 03
-		if(basico != null && basico) {
-			if(especieId == null) de.addError("Campo espécie obrigatório");
-			if(assuntoId == null) de.addError("Campo assunto obrigatório");
-			if(abrangencia == null) de.addError("Campo abrangência obrigatório");
-		}
 
+		//Critério de aceitação 01 e 02 sao referentes ao frontend
+		
+		//campos obrigatorios
+		if(basico == null)  {
+			de.addError("O campo básico é obrigatório");
+		} else {
+			//Critério de aceitação 03
+			if(basico) {
+				if(especieId != null) de.addError("O campo espécie não deve ser informado quando o modelo for do tipo básico");
+				if(assuntoId != null) de.addError("O campo assunto não deve ser informado quando o modelo for do tipo básico");
+				if(abrangencia != null) de.addError("O campo abrangência não deve ser informado quando o modelo for do tipo básico");
+			} else {
+				if(especieId == null) de.addError("O campo espécie é obrigatório");
+				if(assuntoId == null) de.addError("O campo assunto é obrigatório");
+				if(abrangencia == null) de.addError("O campo abrangência é obrigatório");
+			}
+		}
+		
+		if(nome == null || nome.trim().length() == 0 ) de.addError("O campo nome é obrigatório");
+		if(conteudo == null || conteudo.trim().length() == 0 ) de.addError("O campo conteúdo é obrigatório");
+		if(abrangencia == null) de.addError("O campo abrangência é obrigatório");
+		
 		//Critério de aceitação 04 - regras para o frontend, exibir o orgao do usuario chamando o servico de usuario
 		
 		//Critério de aceitação 05
@@ -72,7 +79,7 @@ public class ModeloConteudo {
 		
 		//Critério de aceitação 06 - funcionalidade reference ao servico de modelo de estrurtura
 		
-		
 		de.throwException();
 	}
+	
 }

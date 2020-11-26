@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.gov.pa.prodepa.pae.documento.domain.model.ModeloEstrutura;
+import br.gov.pa.prodepa.pae.documento.domain.model.ModeloEstruturaAggregateRoot;
 import br.gov.pa.prodepa.pae.documento.domain.port.ModeloEstruturaRepository;
 import br.gov.pa.prodepa.pae.documento.entity.ModeloEstruturaEntity;
 import br.gov.pa.prodepa.pae.documento.mapper.ModeloEstruturaMapper;
@@ -21,13 +21,13 @@ public final class ModeloEstruturaPersistenceAdapter implements ModeloEstruturaR
 		this.modeloEstruturaRepository = modeloEstruturaRepository;
 	}
 	
-	public void cadastrarModeloEstrutura(ModeloEstrutura modeloEstrutura) {
+	public void cadastrarModeloEstrutura(ModeloEstruturaAggregateRoot modeloEstrutura) {
 		ModeloEstruturaEntity modeloEstruturaEntity = ModeloEstruturaMapper.INSTANCE.mapToEntity(modeloEstrutura);
 		modeloEstruturaRepository.save(modeloEstruturaEntity);
 	}
 
 	@Override
-	public ModeloEstrutura buscarPorId(Long id) {
+	public ModeloEstruturaAggregateRoot buscarPorId(Long id) {
 		Optional<ModeloEstruturaEntity> modeloEstrutura = modeloEstruturaRepository.findById(id);
 		ModeloEstruturaEntity entity = modeloEstrutura.orElseThrow(()->new RuntimeException("Nenhum modelo de estrutura com o id " + id + " foi encontrado"));
 		return ModeloEstruturaMapper.INSTANCE.mapToDomain(entity);

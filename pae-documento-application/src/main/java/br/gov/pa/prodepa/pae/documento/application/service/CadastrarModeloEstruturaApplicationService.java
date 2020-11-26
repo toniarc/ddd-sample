@@ -12,22 +12,22 @@ import br.gov.pa.prodepa.pae.documento.domain.service.CadastrarModeloEstruturaDo
 
 @Component
 @Transactional
-public final class CadastrarModeloEstruturaApplicationService implements CadastrarModeloEstruturaService {
+public class CadastrarModeloEstruturaApplicationService implements CadastrarModeloEstruturaService {
 
 	private final ModeloEstruturaRepository modeloConteudoRepository;
 	private final GerarThumbnailPort gerarThumbnailPort;
 	
 	@Autowired
-	public void cadastrarModeloEstrutura(CadastrarModeloEstruturaDto command) {
-		CadastrarModeloEstruturaDomainService domainService = new CadastrarModeloEstruturaDomainService(modeloConteudoRepository, gerarThumbnailPort);
-		domainService.cadastrarModeloEstrutura(command);
-	}
-
 	public CadastrarModeloEstruturaApplicationService(ModeloEstruturaRepository modeloConteudoRepository,
 			GerarThumbnailPort gerarThumbnailPort) {
 		super();
 		this.modeloConteudoRepository = modeloConteudoRepository;
 		this.gerarThumbnailPort = gerarThumbnailPort;
+	}
+
+	public void cadastrarModeloEstrutura(CadastrarModeloEstruturaDto command) {
+		CadastrarModeloEstruturaDomainService domainService = new CadastrarModeloEstruturaDomainService(modeloConteudoRepository, gerarThumbnailPort);
+		domainService.cadastrarModeloEstrutura(command);
 	}
 
 }
