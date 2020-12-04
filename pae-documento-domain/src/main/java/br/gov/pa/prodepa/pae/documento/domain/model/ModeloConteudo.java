@@ -1,29 +1,42 @@
 package br.gov.pa.prodepa.pae.documento.domain.model;
 
-import java.util.function.Supplier;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.ABRANGENCIA_OBRIGATORIO;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.ABRANGENCIA_ORGAO_NAO_PODE_SER_MODELO_BASICO;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.BASICO_OBRIGATORIO;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.CONTEUDO_OBRIGATORIO;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.ESPECIE_OBRIGATORIA;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.MODELO_BASICO_NAO_PODE_TER_ASSUNTO;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.MODELO_BASICO_NAO_PODE_TER_ESPECIE;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.MODELO_ESTRUTURA_OBRIGATORIO;
+import static br.gov.pa.prodepa.pae.documento.domain.exception.ModeloConteudoValidationMessages.NOME_OBRIGATORIO;
 
 import br.gov.pa.prodepa.pae.documento.domain.exception.DomainException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
-public final class ModeloConteudo {
+public class ModeloConteudo {
 
-	private final Long id;
-	private final String nome;
-	private final byte[] thumbnail;
-	private final boolean ativo;
-	private final String conteudo;
-	private final Boolean basico;
-	private final Long orgaoId;
-	private final Long especieId;
-	private final Long assuntoId;
-	private final Long modeloEstruturaId;
-	private final Auditoria auditoria;
-	private final TipoAbrangencia abrangencia;
+	private Long id;
+	private String nome;
+	private String thumbnail;
+	private boolean ativo;
+	private String conteudo;
+	private Boolean basico;
+	private Long orgaoId;
+	private Long especieId;
+	private Long assuntoId;
+	private Long modeloEstruturaId;
+	private Auditoria auditoria;
+	private TipoAbrangencia abrangencia;
 
+	public ModeloConteudo() {
+	}
+	
 	@Builder
-	public ModeloConteudo(Long id, String nome, Supplier<byte[]> thumbnail, boolean ativo, String conteudo, Boolean basico,
+	public ModeloConteudo(Long id, String nome, String thumbnail, boolean ativo, String conteudo, Boolean basico,
 			Long orgaoId, Long especieId, Long assuntoId, Long modeloEstruturaId, Auditoria auditoria,
 			TipoAbrangencia abrangencia) {
 		super();
@@ -32,16 +45,20 @@ public final class ModeloConteudo {
 		this.ativo = ativo;
 		this.conteudo = conteudo;
 		this.basico = basico;
-		this.orgaoId = orgaoId;
 		this.especieId = especieId;
 		this.assuntoId = assuntoId;
 		this.modeloEstruturaId = modeloEstruturaId;
 		this.auditoria = auditoria;
 		this.abrangencia = abrangencia;
+		this.thumbnail = thumbnail;
+		
+		if(this.abrangencia != null && this.abrangencia.equals(TipoAbrangencia.ORGAO)) {
+			this.orgaoId = orgaoId;
+		} else {
+			this.orgaoId = null;
+		}
 		
 		validarCampos();
-		
-		this.thumbnail = thumbnail.get();
 	}
 	
 	private void validarCampos() {
@@ -52,29 +69,29 @@ public final class ModeloConteudo {
 		
 		//campos obrigatorios
 		if(basico == null)  {
-			de.addError("O campo básico é obrigatório");
+			de.addError(BASICO_OBRIGATORIO);
 		} else {
 			//Critério de aceitação 03
 			if(basico) {
-				if(especieId != null) de.addError("O campo espécie não deve ser informado quando o modelo for do tipo básico");
-				if(assuntoId != null) de.addError("O campo assunto não deve ser informado quando o modelo for do tipo básico");
-				if(abrangencia != null) de.addError("O campo abrangência não deve ser informado quando o modelo for do tipo básico");
+				if(especieId != null) de.addError(MODELO_BASICO_NAO_PODE_TER_ESPECIE);
+				if(assuntoId != null) de.addError(MODELO_BASICO_NAO_PODE_TER_ASSUNTO);
 			} else {
-				if(especieId == null) de.addError("O campo espécie é obrigatório");
-				if(assuntoId == null) de.addError("O campo assunto é obrigatório");
-				if(abrangencia == null) de.addError("O campo abrangência é obrigatório");
+				if(especieId == null) de.addError(ESPECIE_OBRIGATORIA);
 			}
 		}
 		
-		if(nome == null || nome.trim().length() == 0 ) de.addError("O campo nome é obrigatório");
-		if(conteudo == null || conteudo.trim().length() == 0 ) de.addError("O campo conteúdo é obrigatório");
-		if(abrangencia == null) de.addError("O campo abrangência é obrigatório");
+		if(nome == null || nome.trim().length() == 0 ) de.addError(NOME_OBRIGATORIO);
+		if(conteudo == null || conteudo.trim().length() == 0 ) de.addError(CONTEUDO_OBRIGATORIO);
+		if(abrangencia == null) de.addError(ABRANGENCIA_OBRIGATORIO);
+		if(modeloEstruturaId == null) de.addError(MODELO_ESTRUTURA_OBRIGATORIO);
 		
 		//Critério de aceitação 04 - regras para o frontend, exibir o orgao do usuario chamando o servico de usuario
 		
 		//Critério de aceitação 05
-		if(abrangencia != null && abrangencia.equals(TipoAbrangencia.ESTADO) && basico != null && basico) { 
-			de.addError("Não é permitido definir o modelo como básico quando a abrangência é estadual");
+		if(abrangencia != null) { 
+			if(abrangencia.equals(TipoAbrangencia.ORGAO) && basico != null && basico) {
+				de.addError(ABRANGENCIA_ORGAO_NAO_PODE_SER_MODELO_BASICO);
+			}
 		}
 		
 		//Critério de aceitação 06 - funcionalidade reference ao servico de modelo de estrurtura
@@ -82,4 +99,8 @@ public final class ModeloConteudo {
 		de.throwException();
 	}
 	
+	public ModeloConteudo withId(Long id) {
+		this.id = id;
+		return this;
+	}
 }

@@ -39,6 +39,12 @@
 			<artifactId>html2pdf-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>br.gov.pa.prodepa</groupId>
+			<artifactId>nutanix-storage-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

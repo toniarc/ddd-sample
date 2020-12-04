@@ -12,5 +12,6 @@
   	<module>pae-documento-web-adapter</module>
   	<module>pae-documento-persistence-adapter</module>
   	<module>html2pdf-client</module>
+  	<module>nutanix-storage-adapter</module>
   </modules>
 </project>

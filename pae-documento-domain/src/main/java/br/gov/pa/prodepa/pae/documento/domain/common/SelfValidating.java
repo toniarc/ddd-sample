@@ -5,7 +5,13 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import br.gov.pa.prodepa.pae.documento.domain.exception.CustomFieldError;
+import br.gov.pa.prodepa.pae.documento.domain.exception.DomainException;
+
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public abstract class SelfValidating<T> {
 
@@ -23,7 +29,9 @@ public abstract class SelfValidating<T> {
   public void validateSelf() {
     Set<ConstraintViolation<T>> violations = validator.validate((T) this);
     if (!violations.isEmpty()) {
-      throw new ConstraintViolationException(violations);
+      //throw new ConstraintViolationException(violations);
+    	List<CustomFieldError> errors = violations.stream().map( v -> new CustomFieldError(v.getPropertyPath().toString() , v.getMessage())).collect(Collectors.toList());
+    	new DomainException(errors).throwException();
     }
   }
 }

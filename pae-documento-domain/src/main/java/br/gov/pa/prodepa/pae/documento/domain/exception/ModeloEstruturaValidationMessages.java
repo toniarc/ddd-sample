@@ -14,5 +14,7 @@ public class ModeloEstruturaValidationMessages {
 	public static final String MARGEM_RODAPE_REQUERIDA = "O campo margem rodapé é obrigatório";
 	public static final String MARGEM_DIREITA_REQUERIDA = "O campo margem direita é obrigatório";
 	public static final String MARGEM_ESQUERDA_REQUERIDA = "O campo margem esquerda é obrigatório";
+	public static final String ID_OBRIGATORIO = "Informe o id";
+	public static final String OBJECT_ID_OBRIGATORIO = "Informe o id do objeto";
 	
 }

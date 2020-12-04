@@ -17,13 +17,17 @@ public interface ModeloEstruturaMapper {
 	@Mapping(source="margens.topo", target="margemTopo")
 	@Mapping(source="margens.rodape", target="margemRodape")
 	@Mapping(source="auditoria.manutUsuarioId", target="manutUsuarioId")
-	ModeloEstruturaEntity mapToEntity(ModeloEstruturaAggregateRoot modeloEstrutura);
+	@Mapping(source="auditoria.manutData", target="manutData")
+	@Mapping(source="orgao.id", target="orgaoId")
+	ModeloEstruturaEntity map(ModeloEstruturaAggregateRoot modeloEstrutura);
 
 	@Mapping(source="margemDireita", target="margens.direita")
 	@Mapping(source="margemEsquerda", target="margens.esquerda")
 	@Mapping(source="margemTopo", target="margens.topo")
 	@Mapping(source="margemRodape", target="margens.rodape")
 	@Mapping(source="manutUsuarioId", target="auditoria.manutUsuarioId")
-	ModeloEstruturaAggregateRoot mapToDomain(ModeloEstruturaEntity entity);
+	@Mapping(source="manutData", target="auditoria.manutData")
+	@Mapping(source="orgaoId", target="orgao.id")
+	ModeloEstruturaAggregateRoot map(ModeloEstruturaEntity entity);
 	
 }

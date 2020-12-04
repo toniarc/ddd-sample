@@ -18,6 +18,10 @@ public class DomainException extends RuntimeException{
 		errors.add(new CustomFieldError(null, message));
 	}
 	
+	public DomainException(List<CustomFieldError> errors) {
+		this.errors.addAll(errors);
+	}
+	
 	public DomainException(String message, List<CustomFieldError> errors) {
 		super(message);
 		this.errors.addAll(errors);
