@@ -1,5 +1,8 @@
 package br.gov.pa.prodepa.pae.documento.domain.test.unit;
 
+import br.gov.pa.prodepa.pae.documento.domain.dto.FiltrosPesquisaModeloConteudoDto;
+import br.gov.pa.prodepa.pae.documento.domain.dto.ModelosConteudoElementoListaDto;
+import br.gov.pa.prodepa.pae.documento.domain.dto.SearchResponse;
 import br.gov.pa.prodepa.pae.documento.domain.model.ModeloConteudo;
 import br.gov.pa.prodepa.pae.documento.domain.model.TipoAbrangencia;
 import br.gov.pa.prodepa.pae.documento.domain.port.ModeloConteudoRepository;
@@ -46,6 +49,12 @@ public class ModeloConteudoRepositoryMock implements ModeloConteudoRepository{
 
 	@Override
 	public ModeloConteudo buscarPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SearchResponse<ModelosConteudoElementoListaDto> listar(FiltrosPesquisaModeloConteudoDto filtros) {
 		// TODO Auto-generated method stub
 		return null;
 	}
